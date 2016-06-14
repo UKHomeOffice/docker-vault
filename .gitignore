@@ -1,0 +1,4 @@
+
+*.swp
+tests/vault_safe
+tests/test.hcl

@@ -1,0 +1,150 @@
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: vault-proxy-config
+  namespace: vault
+data:
+  nginx.conf: |
+    dXNlciAgICAgICAgICAgICAgbmdpbng7Cndvcmtlcl9wcm9jZXNzZXMgIDQ7
+    CmRhZW1vbiAgICAgICAgICAgIG9mZjsKCmVycm9yX2xvZyAgL3Zhci9sb2cv
+    bmdpbngvZXJyb3IubG9nIHdhcm47CnBpZCAgICAgICAgL3Zhci9ydW4vbmdp
+    bngucGlkOwoKZXZlbnRzIHsKICB3b3JrZXJfY29ubmVjdGlvbnMgMTAyNDsK
+    fQoKaHR0cCB7CiAgaW5jbHVkZSAgICAgICAvZXRjL25naW54L21pbWUudHlw
+    ZXM7CiAgZGVmYXVsdF90eXBlICBhcHBsaWNhdGlvbi9vY3RldC1zdHJlYW07
+    CgogIGxvZ19mb3JtYXQgIG1haW4gICckcmVtb3RlX2FkZHIgLSAkcmVtb3Rl
+    X3VzZXIgWyR0aW1lX2xvY2FsXSAiJHJlcXVlc3QiICcKICAgICAgICAgICAg
+    ICAgICAgICAnJHN0YXR1cyAkYm9keV9ieXRlc19zZW50ICIkaHR0cF9yZWZl
+    cmVyIiAnCiAgICAgICAgICAgICAgICAgICAgJyIkaHR0cF91c2VyX2FnZW50
+    IiAiJGh0dHBfeF9mb3J3YXJkZWRfZm9yIic7CgogIGFjY2Vzc19sb2cgL2Rl
+    di9zdGRvdXQgbWFpbjsKCiAgc2VuZGZpbGUgICAgICAgICAgICBvbjsKICBr
+    ZWVwYWxpdmVfdGltZW91dCAgIDYwOwoKICBpbmNsdWRlIC9ldGMvbmdpbngv
+    Y29uZi5kLyouY29uZjsKCiAgdXBzdHJlYW0gdmF1bHRfdXBzdHJlYW0gewog
+    ICAgc2VydmVyIDEwLjIwMC4xMC4xMDo4MjAwOwogIH0KCiAgc2VydmVyIHsK
+    ICAgIGxpc3RlbiAwLjAuMC4wOjQ0MzsKICAgIHNlcnZlcl9uYW1lIHZhdWx0
+    LnN2Yy52YXVsdC5jbHVzdGVyLmxvY2FsOwoKICAgIHNzbCAgICAgICAgICAg
+    ICAgICAgb247CiAgICBzc2xfY2VydGlmaWNhdGUgICAgIC9ldGMvY2VydHMv
+    dmF1bHQtY3J0LnBlbTsKICAgIHNzbF9jZXJ0aWZpY2F0ZV9rZXkgL2V0Yy9j
+    ZXJ0cy92YXVsdC1rZXkucGVtOwogICAgc3NsX3Byb3RvY29scyAgICAgICBU
+    TFN2MSBUTFN2MS4xIFRMU3YxLjI7CiAgICBzc2xfY2lwaGVycyAgICAgICAg
+    IEhJR0g6IWFOVUxMOiFNRDU7CgogICAgbG9jYXRpb24gLyB7CiAgICAgIHBy
+    b3h5X3Bhc3MgICAgICAgICAgICAgICBodHRwczovL3ZhdWx0X3Vwc3RyZWFt
+    OwogICAgICBwcm94eV9odHRwX3ZlcnNpb24gICAgICAgMS4xOwogICAgICBw
+    cm94eV9zZXRfaGVhZGVyICAgICAgICAgQ29ubmVjdGlvbiAiIjsKICAgICAg
+    cHJveHlfcGFzc19oZWFkZXIgICAgICAgIEF1dGhvcml6YXRpb247CiAgICAg
+    IHByb3h5X3NzbF9zZXNzaW9uX3JldXNlICBvZmY7CiAgICAgIHByb3h5X2J1
+    ZmZlcmluZyAgICAgICAgICBvZmY7CiAgICAgIHByb3h5X3NldF9oZWFkZXIg
+    ICAgICAgICBIb3N0ICAgICAgICAgICAgJGhvc3Q7CiAgICAgIHByb3h5X3Nl
+    dF9oZWFkZXIgICAgICAgICBYLVJlYWwtSVAgICAgICAgJHJlbW90ZV9hZGRy
+    OwogICAgICBwcm94eV9zZXRfaGVhZGVyICAgICAgICAgWC1Gb3J3YXJkZWQt
+    Rm9yICRwcm94eV9hZGRfeF9mb3J3YXJkZWRfZm9yOwogICAgICBwcm94eV9p
+    bnRlcmNlcHRfZXJyb3JzICAgb247CiAgICAgIGVycm9yX3BhZ2UgMzAxIDMw
+    MiAzMDcgPSBAcmVkaXJlY3Q7CiAgICB9CgogICAgbG9jYXRpb24gQHJlZGly
+    ZWN0IHsKICAgICAgc2V0ICRmb28gJHVwc3RyZWFtX2h0dHBfbG9jYXRpb247
+    CiAgICAgIHByb3h5X3Bhc3MgJGZvbzsKICAgIH0KICB9Cn0K
+#---
+#apiVersion: v1
+#kind: Secret
+#metadata:
+#  name: vault-proxy-config
+#  namespace: vault
+#data:
+#  nginx.conf: |
+#    user              nginx;
+#    worker_processes  4;
+#    daemon            off;
+#
+#    error_log  /var/log/nginx/error.log warn;
+#    pid        /var/run/nginx.pid;
+#
+#    events {
+#      worker_connections 1024;
+#    }
+#
+#    http {
+#      include       /etc/nginx/mime.types;
+#      default_type  application/octet-stream;
+#
+#      log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+#                        '$status $body_bytes_sent "$http_referer" '
+#                        '"$http_user_agent" "$http_x_forwarded_for"';
+#
+#      access_log /dev/stdout main;
+#
+#      sendfile            on;
+#      keepalive_timeout   60;
+#
+#      include /etc/nginx/conf.d/*.conf;
+#
+#      upstream vault_upstream {
+#        server 10.200.10.10:8200;
+#      }
+#
+#      server {
+#        listen 0.0.0.0:443;
+#        server_name vault.svc.vault.cluster.local;
+#
+#        ssl                 on;
+#        ssl_certificate     /etc/certs/vault-crt.pem;
+#        ssl_certificate_key /etc/certs/vault-key.pem;
+#        ssl_protocols       TLSv1 TLSv1.1 TLSv1.2;
+#        ssl_ciphers         HIGH:!aNULL:!MD5;
+#
+#        location / {
+#          proxy_pass               https://vault_upstream;
+#          proxy_http_version       1.1;
+#          proxy_set_header         Connection "";
+#          proxy_pass_header        Authorization;
+#          proxy_ssl_session_reuse  off;
+#          proxy_buffering          off;
+#          proxy_set_header         Host            $host;
+#          proxy_set_header         X-Real-IP       $remote_addr;
+#          proxy_set_header         X-Forwarded-For $proxy_add_x_forwarded_for;
+#          proxy_intercept_errors   on;
+#          error_page 301 302 307 = @redirect;
+#        }
+#
+#        location @redirect {
+#          set $foo $upstream_http_location;
+#          proxy_pass $foo;
+#        }
+#      }
+#    }
+---
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: vault-proxy
+  namespace: vault
+  labels:
+    name: vault-proxy
+spec:
+  replicas: 2
+  selector:
+    name: vault-proxy
+  template:
+    metadata:
+      labels:
+        name: vault-proxy
+    spec:
+      containers:
+      - name: nginx-proxy
+        image: nginx:1.9.5
+        ports:
+        - containerPort: 443
+        args:
+          - /usr/sbin/nginx
+          - -c
+          - /etc/config/nginx.conf
+        volumeMounts:
+        - name: vault-proxy-config
+          mountPath: /etc/config
+        - name: vault-certs
+          mountPath: /etc/certs
+      volumes:
+      - name: vault-certs
+        secret:
+          secretName: vault-certs
+      - name: vault-proxy-config
+        secret:
+          secretName: vault-proxy-config

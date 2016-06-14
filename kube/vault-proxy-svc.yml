@@ -1,0 +1,17 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    name: vault-proxy
+  namespace: vault
+  name: vault-proxy
+spec:
+  type: NodePort
+  ports:
+    - name: https
+      nodePort: 30101
+      port: 443
+      targetPort: 443
+  selector:
+    name: vault-proxy
