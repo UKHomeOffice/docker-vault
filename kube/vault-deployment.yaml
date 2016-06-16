@@ -1,0 +1,70 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: vault
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        service: vault
+    spec:
+      serviceAccount: vault
+      containers:
+        - name: vault
+          image: quay.io/ukhomeofficedigital/vault:v0.1.0
+          imagePullPolicy: Always
+          resources:
+            limits:
+              memory: "300Mi"
+            requests:
+              memory: "100Mi"
+          env:
+            - name: VAULT_ADVERTISE_ADDR
+              value: "http://127.0.0.1:8200"
+            - name: TLS_DISABLE
+              value: "1"
+            - name: VAULT_BACKEND
+              value: dynamodb
+            - name: AWS_DYNAMODB_TABLE
+              value: "vaultdb"
+            - name: AWS_DYNAMODB_READ_CAPACITY
+              value: "30"
+            - name: AWS_DYNAMODB_WRITE_CAPACITY
+              value: "30"
+            - name: AWS_DEFAULT_REGION
+              value: "eu-west-1"
+            - name: AWS_ACCESS_KEY_ID
+              value: "DJaxMDgJrBIQ3vQ/9PQHvUYk"
+            - name: AWS_SECRET_ACCESS_KEY
+              value: "kfacC5VHqW9WlvWv+ehqbcWm"
+          ports:
+            - containerPort: 8200
+              name: client
+        - name: overlord
+          image: quay.io/ukhomeofficedigital/vault:v0.1.0
+          imagePullPolicy: Always
+          resources:
+            limits:
+              memory: "100Mi"
+            requests:
+              memory: "50Mi"
+          env:
+            - name: VAULT_ADVERTISE_ADDR
+              value: "http://127.0.0.1:8200"
+            - name: VAULT_SKIP_VERIFY
+              value: "true"
+            - name: TLS_DISABLE
+              value: "1"
+            - name: VAULT_ADMIN_PASSWORD
+              value: "VALZ5wilKrYOLLm+vNmOkUDq"
+          command:
+            - "/vault/bin/overlord.sh"
+          volumeMounts:
+            - mountPath: /vault/secrets
+              name: vault-unseal
+      volumes:
+        - name: vault-unseal
+          secret:
+            secretName: vault-unseal
