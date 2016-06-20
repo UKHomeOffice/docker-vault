@@ -1,24 +1,22 @@
 FROM fedora:23
-MAINTAINER Rohith <gambol99@gmail.com>
 
-ENV VAULT_VERSION 0.5.3
-ENV KUBECTL_VERSION 1.2.4
+RUN dnf upgrade -y -q; dnf clean all
+RUN dnf install -y -q unzip; dnf clean all
+RUN adduser -d /vault -m vault
 
-RUN dnf install -y wget && mkdir -p /opt/bin
-RUN wget https://releases.hashicorp.com/vault/${VAULT_VERSION}/vault_${VAULT_VERSION}_linux_amd64.zip -O /tmp/vault_${VAULT_VERSION}_linux_amd64.zip
-# I'd like to use alpine linux but the kubectl is not statically linked
-RUN wget https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl -O /opt/bin/kubectl
-
-RUN dnf install -y unzip hostname && \
-    cd /tmp && \
-    unzip /tmp/vault_${VAULT_VERSION}_linux_amd64.zip && \
-    rm -f /tmp/vault_${VAULT_VERSION}_linux_amd64.zip && \
-    mv /tmp/vault /opt/bin/vault && \
-    chmod +x /opt/bin/kubectl /opt/bin/vault
-
-ADD config/vault.default.hcl /etc/vault/vault.default.hcl
-ADD bin/docker-entrypoint.sh /docker-entrypoint.sh
-
+WORKDIR /vault
 EXPOSE 8200
 
-ENTRYPOINT [ "/docker-entrypoint.sh" ]
+ENV VAULT_VERSION 0.6.0
+ENV KUBECTL_VERSION 1.2.4
+
+RUN curl -s -o /tmp/vault.zip https://releases.hashicorp.com/vault/${VAULT_VERSION}/vault_${VAULT_VERSION}_linux_amd64.zip && unzip /tmp/vault.zip -d /usr/bin; rm -f /tmp/vault.zip; chmod +x /usr/bin/vault
+RUN curl -s -o /usr/bin/kubectl https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl; chmod +x /usr/bin/kubectl
+
+COPY config/vault.hcl /vault/vault.hcl
+COPY bin/env.sh /vault/bin/env.sh
+COPY bin/run.sh /vault/bin/run.sh
+COPY bin/overlord.sh /vault/bin/overlord.sh
+
+USER vault
+ENTRYPOINT [ "/vault/bin/run.sh" ]

@@ -5,13 +5,9 @@ metadata:
   name: vault
   labels:
     name: vault
-  namespace: vault
 spec:
-  type: ClusterIP
-  clusterIP: 10.200.10.10
   ports:
-    - name: vault
+    - name: client
       port: 8200
-      targetPort: 8200
   selector:
-    role: vault
+    service: vault
