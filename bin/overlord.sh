@@ -31,7 +31,7 @@ function retry() {
 
 
 function vault_alive() {
-  if ! curl -s ${VAULT_ADDR} > /dev/null; then
+  if ! curl -k -s ${VAULT_ADDR} > /dev/null; then
     announce "vault is not ready."
     return 1
   fi

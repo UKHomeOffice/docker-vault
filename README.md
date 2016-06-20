@@ -37,13 +37,19 @@ Any other environment variables, which are supported by vault, can be set.
 ### Deployment
 
 * Deploy an empty vault-unseal secret (will be updated by overlord script)
-`kubectl --namespace=vault create -f kube/vault-secrets.yaml`
+```
+kubectl --namespace=vault create -f kube/vault-secrets.yaml
+```
 
 * Deploy vault pod (vault itself and overlord container)
-`kubectl --namespace=vault create -f kube/vault-deployment.yaml`
+```
+kubectl --namespace=vault create -f kube/vault-deployment.yaml
+```
 
 * Deploy a kubernetes service endpoint for vault
-`kubectl --namespace=vault create -f kube/vault-svc.yaml`
+```
+kubectl --namespace=vault create -f kube/vault-svc.yaml
+```
 
 
 ### Other
