@@ -4,6 +4,7 @@
 
 : ${KUBERNETES_NAMESPACE:=$(cat /run/secrets/kubernetes.io/serviceaccount/namespace)}
 : ${VAULT_CONFIG:=/vault/vault.hcl}
+: ${VAULT_BIND_ADDR:=127.0.0.1}
 : ${VAULT_BACKEND:=inmem}
 : ${VAULT_SKIP_VERIFY:=false}
 : ${TLS_DISABLE:=1}

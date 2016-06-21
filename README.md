@@ -26,6 +26,7 @@ change environment variables accordingly in [vault deployment file](kube/vault-d
 ### Configuration
 
 * `VAULT_BACKEND` - defaults to `inmem`.
+* `VAULT_BIND_ADDR` - vault bind address, defaults to `127.0.0.1`
 * `TLS_DISABLE` - defaults to 1.
 * `VAULT_ADMIN_PASSWORD` - admin password that overlord sets when creating an
   admin user. If unset, overlord will generate a random one, which will be
