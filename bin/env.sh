@@ -5,6 +5,7 @@
 : ${KUBERNETES_NAMESPACE:=$(cat /run/secrets/kubernetes.io/serviceaccount/namespace)}
 : ${VAULT_CONFIG:=/vault/vault.hcl}
 : ${VAULT_BIND_ADDR:=127.0.0.1}
+: ${VAULT_ADVERTISE_IP:=127.0.0.1}
 : ${VAULT_BACKEND:=inmem}
 : ${VAULT_SKIP_VERIFY:=false}
 : ${TLS_DISABLE:=1}
@@ -16,6 +17,8 @@
 
 if [[ ${TLS_DISABLE} == '0' ]]; then
   export VAULT_ADDR='https://127.0.0.1:8200'
+  export VAULT_ADVERTISE_ADDR="https://${VAULT_ADVERTISE_IP}:8200"
 else
   export VAULT_ADDR='http://127.0.0.1:8200'
+  export VAULT_ADVERTISE_ADDR="http://${VAULT_ADVERTISE_IP}:8200"
 fi
