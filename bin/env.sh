@@ -22,3 +22,5 @@ else
   export VAULT_ADDR='http://127.0.0.1:8200'
   export VAULT_ADVERTISE_ADDR="http://${VAULT_ADVERTISE_IP}:8200"
 fi
+
+export RECOVERY_MODE
