@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 [[ ${DEBUG} == 'true' ]] && set -x
 

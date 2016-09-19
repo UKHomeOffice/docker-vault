@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 [[ ${DEBUG} == 'true' ]] && set -x
 
@@ -72,7 +72,7 @@ EOF
 
 function initialize_vault() {
   announce 'initializing vault.'
-  _tmpfile=$(mktemp /tmp/vault.XXXX)
+  _tmpfile=$(mktemp /tmp/vault.XXXXXX)
   vault init -key-shares=1 -key-threshold=1 > ${_tmpfile}
   vault_initialized || failed 'failed to initialize vault.'
 
