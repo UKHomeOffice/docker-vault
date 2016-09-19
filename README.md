@@ -1,5 +1,7 @@
 # Vault in Kubernetes
 
+[![Build Status](https://drone.digital.homeoffice.gov.uk/api/badges/UKHomeOffice/docker-vault/status.svg)](https://drone.digital.homeoffice.gov.uk/UKHomeOffice/docker-vault)
+
 Vault in a docker image with all the necessary scripts to run vault in
 kubernetes cluster.
 
