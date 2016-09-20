@@ -128,7 +128,12 @@ while true; do
       initialize_vault
       vault_sealed && unseal_vault
       retry create_admin_user
-      create_kubernetes_secret
+      if [[ -n ${KUBERNETES_NAMESPACE} ]]; then
+        create_kubernetes_secret
+      fi
+    fi
+    if [[ ${OVERLORD_DAEMON} == 'false' ]]; then
+      break
     fi
     sleep 30
   else

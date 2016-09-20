@@ -2,6 +2,7 @@
 
 [[ ${DEBUG} == 'true' ]] && set -x
 
+: ${OVERLORD_DAEMON:=true}
 : ${KUBERNETES_NAMESPACE:=$(cat /run/secrets/kubernetes.io/serviceaccount/namespace)}
 : ${VAULT_CONFIG:=/vault/vault.hcl}
 : ${VAULT_BACKEND:=inmem}
