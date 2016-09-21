@@ -1,20 +1,22 @@
 # Vault in Kubernetes
 
+[![Build Status](https://drone.digital.homeoffice.gov.uk/api/badges/UKHomeOffice/docker-vault/status.svg)](https://drone.digital.homeoffice.gov.uk/UKHomeOffice/docker-vault)
+
 Vault in a docker image with all the necessary scripts to run vault in
 kubernetes cluster.
 
 There are two main components in this setup:
 - Vault container - main vault process which listens in a tcp socket
 - overlord container - bash script which takes care of unsealing vault,
-  creating admin user and persisting vault unseal key
+  creating admin user and persisting vault unseal key if `KUBERNETES_NAMESPACE` is set.
 
 
 ## Getting Started
 
 First of all, you need to make sure that your kubernetes cluster supports
 service accounts and that either the default or vault specific service account
-has access to create kubernetes secrets. However this is only needed if you're
-bootstrapping vault.
+has access to create kubernetes secrets in the namespace. However this is only
+needed if you're bootstrapping vault.
 
 We are going assume that vault is being deployed into a namespace called vault.
 
@@ -30,6 +32,9 @@ change environment variables accordingly in [vault deployment file](kube/vault-d
 * `VAULT_ADMIN_PASSWORD` - admin password that overlord sets when creating an
   admin user. If unset, overlord will generate a random one, which will be
   logged, so changing it is advisable.
+* `KUBERNETES_NAMESPACE` - if service account is present, then the namespace
+  name will be taken from there and vault unseal key will be persisted as
+  kubernetes secret.
 
 Any other environment variables, which are supported by vault, can be set.
 
