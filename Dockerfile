@@ -1,6 +1,6 @@
 FROM alpine:3.4
 
-RUN apk upgrade --no-cache && apk add --no-cache bash curl
+RUN apk upgrade --no-cache && apk add --no-cache bash curl coreutils
 RUN adduser -h /vault -D vault
 
 WORKDIR /vault
