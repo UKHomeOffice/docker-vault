@@ -1,36 +1,32 @@
 pipeline:
   build_docker_image:
-    image: docker:1.11
+    image: docker:17.09.0-ce
     environment:
-      - DOCKER_HOST=tcp://127.0.0.1:2375
+      - DOCKER_HOST=tcp://172.17.0.1:2375
     commands:
-      - docker build -t vault .
+      - docker build -t vault:$${DRONE_COMMIT_SHA} .
 
   run_vault:
-    image: docker:1.11
+    image: vault:${DRONE_COMMIT_SHA}
     environment:
-      - DOCKER_HOST=tcp://127.0.0.1:2375
+      - DOCKER_HOST=tcp://172.17.0.1:2375
+      - VAULT_ADMIN_PASSWORD=foo
+      - OVERLORD_DAEMON=false
+      - VAULT_ADDR=http://127.0.0.1:8200
     commands:
-      - docker run --name vault -d --net host vault
-      - docker run --rm -e VAULT_ADMIN_PASSWORD=foo -e OVERLORD_DAEMON=false --entrypoint /vault/bin/overlord.sh --net host vault
-      - docker run --rm -e VAULT_ADDR=http://127.0.0.1:8200 --entrypoint /bin/sh --net host vault -c 'vault auth -method=userpass username=admin password=foo'
-      - docker logs vault
+      - vault &
+      - /vault/bin/overlord.sh
+      - vault auth -method=userpass username=admin password=foo
 
   image_to_quay:
-    image: docker:1.11
+    image: docker:17.09.0-ce
+    secrets:
+      - docker_password
     environment:
       - DOCKER_HOST=tcp://127.0.0.1:2375
     commands:
-      - docker login -u="ukhomeofficedigital+drone_vault" -p=${DOCKER_PASSWORD} quay.io
-      - docker tag vault quay.io/ukhomeofficedigital/vault:${DRONE_TAG}
-      - docker push quay.io/ukhomeofficedigital/vault:${DRONE_TAG}
+      - docker login -u="ukhomeofficedigital+drone_vault" -p=$${DOCKER_PASSWORD} quay.io
+      - docker tag vault quay.io/ukhomeofficedigital/vault:$${DRONE_TAG}
+      - docker push quay.io/ukhomeofficedigital/vault:$${DRONE_TAG}
     when:
       event: tag
-
-services:
-  dind:
-    image: docker:1.11-dind
-    privileged: true
-    command:
-      - "-s"
-      - "overlay"
