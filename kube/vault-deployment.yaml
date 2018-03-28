@@ -36,9 +36,9 @@ spec:
             - name: AWS_DEFAULT_REGION
               value: "eu-west-1"
             - name: AWS_ACCESS_KEY_ID
-              value: "DJaxMDgJrBIQ3vQ/9PQHvUYk"
+              value: "THEAWSACCESSKEYHERE"
             - name: AWS_SECRET_ACCESS_KEY
-              value: "kfacC5VHqW9WlvWv+ehqbcWm"
+              value: "THESECRETACCESSKEYHERE"
           ports:
             - containerPort: 8200
               name: client
@@ -58,7 +58,7 @@ spec:
             - name: TLS_DISABLE
               value: "1"
             - name: VAULT_ADMIN_PASSWORD
-              value: "VALZ5wilKrYOLLm+vNmOkUDq"
+              value: "VAULTPASSWORDHERE"
           command:
             - "/vault/bin/overlord.sh"
           volumeMounts:
